@@ -5,7 +5,7 @@ const taskModel = require("../models/tasks")
 
 const taskRouter = Router()
 
-
+// all tasks
 taskRouter.get("/:userId/task",async(req,res)=>{
     const userId = req.params.userId
     const tasks = await taskModel.find({userId})
@@ -13,6 +13,8 @@ taskRouter.get("/:userId/task",async(req,res)=>{
     res.send(tasks)
 })
 
+
+// sameid tasks
 taskRouter.get("/:userId/task/:id",async(req,res)=>{
    
     const id = req.params.id
@@ -22,6 +24,7 @@ taskRouter.get("/:userId/task/:id",async(req,res)=>{
     res.send(tasks)
 })
 
+//single task
 
 taskRouter.get("/:userId/task/:id",async(req,res)=>{
     const id1 = req.params.id
@@ -59,7 +62,7 @@ tasks.save((err,success)=>{
 
 
 taskRouter.delete("/:userId/task/:id",async(req,res)=>{
-  await taskModel.deleteMany({_id:req.params.id})
+  await taskModel.deleteMany({_id:req.params.id}||{tid:req.params.id})
   res.send("succesfully delete task")
 })
 
